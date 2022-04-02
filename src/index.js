@@ -50,6 +50,19 @@ app.post("/account", (request, response) => {
 
 // app.use(verifyExistsAccountByCPF);
 
+app.put("/account", verifyExistsAccountByCPF, (request, response) => {
+  const { customer } = request;
+  const { name } = request.body;
+  customer.name = name;
+  return response.status(201).send();
+});
+
+app.get("/account", verifyExistsAccountByCPF, (request, response) => {
+  const { customer } = request;
+  const { name } = request.body;
+  return response.status(201).send(customer);
+});
+
 app.get("/statement", verifyExistsAccountByCPF, (request, response) => {
   const { customer } = request;
   return response.json(customer.statement);
