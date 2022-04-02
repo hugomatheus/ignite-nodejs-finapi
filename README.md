@@ -1,4 +1,4 @@
-# FinApi - Financia
+# FinApi
 
 ## Fundamentos NodeJS
 ## Requisitos
