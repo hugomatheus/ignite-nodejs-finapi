@@ -63,6 +63,21 @@ app.get("/account", verifyExistsAccountByCPF, (request, response) => {
   return response.status(201).send(customer);
 });
 
+app.delete("/account", verifyExistsAccountByCPF, (request, response) => {
+  const { customer } = request;
+  const findIndex = customers.findIndex(findCustomer => findCustomer.cpf === customer.cpf);
+  customers.splice(findIndex, 1);
+
+  return response.status(200).send(customers);
+});
+
+app.get("/balance", verifyExistsAccountByCPF, (request, response) => {
+  const { customer } = request;
+  const balance = getBalance(customer.statement);
+
+  return response.json(balance);
+});
+
 app.get("/statement", verifyExistsAccountByCPF, (request, response) => {
   const { customer } = request;
   return response.json(customer.statement);
